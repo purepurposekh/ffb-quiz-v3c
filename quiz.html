@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Quiet Reset · Tracy Harris Co</title>
+  <meta name="description" content="20 honest questions. Find the one part of your Freedom Filled Business that's asking for your attention first." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f6f4f1" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/purepurposekh/tracy-harris-brand-kit@main/styles/fonts.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/purepurposekh/tracy-harris-brand-kit@main/styles/tokens.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='24' fill='%236e8e77'/></svg>" />
+  <style>input, button { font-size: 16px; }</style>
+</head>
+<body data-brand="ffb">
+
+  <noscript>
+    <div style="padding:48px 24px; text-align:center; max-width:560px; margin:0 auto; font-family:Georgia, serif;">
+      <h1 style="font-size:28px; margin:0 0 16px; color:#1e3735;">JavaScript required</h1>
+      <p style="color:#313131; margin:0 0 24px;">This quiz needs JavaScript enabled to run. If you'd prefer, send Tracy an email and she'll talk you through it directly.</p>
+      <a href="mailto:hello@tracyharris.co" style="color:#6e8e77;">hello@tracyharris.co</a>
+    </div>
+  </noscript>
+
+  <div class="quiz-shell">
+
+    <header class="quiz-progress" role="banner">
+      <div class="quiz-progress__meta">
+        <span id="progressLabel">Question 1 of 20</span>
+        <span class="quiz-progress__pillar" id="progressPillar">Build</span>
+      </div>
+      <div class="quiz-progress__bar" aria-hidden="true">
+        <div class="quiz-progress__fill" id="progressFill"></div>
+      </div>
+    </header>
+
+    <main class="quiz-body" role="main">
+      <div class="quiz-card" id="quizCard">
+        <h1 class="quiz-question" id="quizQuestion" aria-live="polite">Loading</h1>
+        <div class="quiz-answers" id="quizAnswers" role="radiogroup" aria-labelledby="quizQuestion"></div>
+      </div>
+    </main>
+
+    <nav class="quiz-nav" aria-label="Quiz navigation">
+      <button type="button" class="quiz-nav__back" id="backBtn" aria-label="Previous question" disabled>
+        &larr; Back
+      </button>
+      <span id="navStatus" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--p-mute);">
+        Select to answer
+      </span>
+    </nav>
+
+  </div>
+
+  <script>
+    const QUESTIONS = [
+      { id: 'build_1', pillar: 'Build',      text: 'I have a clear, defined offer that I can explain in one sentence.' },
+      { id: 'build_2', pillar: 'Build',      text: 'I know exactly who my right-fit client is and what keeps them up at night.' },
+      { id: 'build_3', pillar: 'Build',      text: 'My pricing reflects the value I deliver, and I feel confident charging it.' },
+      { id: 'build_4', pillar: 'Build',      text: 'I have a documented signature framework or methodology that sets my offer apart.' },
+      { id: 'sell_1',  pillar: 'Sell',       text: 'I have a consistent way of attracting new leads into my business every week.' },
+      { id: 'sell_2',  pillar: 'Sell',       text: 'I have a proven process for converting interested people into paying clients.' },
+      { id: 'sell_3',  pillar: 'Sell',       text: 'I feel confident selling my offer without it feeling pushy or awkward.' },
+      { id: 'sell_4',  pillar: 'Sell',       text: 'I understand the difference between a launch strategy and an evergreen strategy, and I have chosen which is right for my business.' },
+      { id: 'lead_1',  pillar: 'Lead',       text: 'I have systems in place that allow my business to run without me being involved in every decision.' },
+      { id: 'lead_2',  pillar: 'Lead',       text: 'I have team members or support who handle tasks I no longer need to do myself.' },
+      { id: 'lead_3',  pillar: 'Lead',       text: 'I spend most of my working time on high-value activities, not admin or busywork.' },
+      { id: 'lead_4',  pillar: 'Lead',       text: 'I have a documented onboarding process that new clients or members go through without my direct involvement.' },
+      { id: 'fresh_f', pillar: 'F.R.E.S.H.', text: 'I exercise regularly from a place of self-care and energy, not guilt or punishment.' },
+      { id: 'fresh_r', pillar: 'F.R.E.S.H.', text: 'I spend meaningful time with people who are aligned with where I am going, not just where I have been.' },
+      { id: 'fresh_e', pillar: 'F.R.E.S.H.', text: 'My workspace and daily environment feel intentional, energising, and aligned with the business I am building.' },
+      { id: 'fresh_s1',pillar: 'F.R.E.S.H.', text: 'I trust my gut and make decisions with clarity, rather than constantly second-guessing myself.' },
+      { id: 'fresh_s2',pillar: 'F.R.E.S.H.', text: 'I prioritise my own self-care and personal development without feeling guilty about it.' },
+      { id: 'fresh_h', pillar: 'F.R.E.S.H.', text: 'I feel energised by my work most days, rather than depleted or running on empty.' },
+      { id: 'fresh_kg',pillar: 'F.R.E.S.H.', text: 'I can clearly articulate my personal values and they directly inform how I structure my business.' },
+      { id: 'fresh_life',pillar: 'F.R.E.S.H.', text: 'My business supports the lifestyle I actually want, not the other way around.' },
+    ];
+    const ANSWERS = [
+      { label: 'Strongly disagree', value: 1 },
+      { label: 'Disagree',          value: 2 },
+      { label: 'Neutral',            value: 3 },
+      { label: 'Agree',              value: 4 },
+      { label: 'Strongly agree',    value: 5 },
+    ];
+    const STORAGE_KEY = 'ffb-quiz-v3c-answers';
+    const state = { current: 0, answers: {} };
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed.current === 'number' && parsed.answers) {
+          state.current = Math.min(parsed.current, QUESTIONS.length - 1);
+          state.answers = parsed.answers;
+        }
+      }
+    } catch (e) {}
+
+    const $q = document.getElementById('quizQuestion');
+    const $a = document.getElementById('quizAnswers');
+    const $fill = document.getElementById('progressFill');
+    const $label = document.getElementById('progressLabel');
+    const $pillar = document.getElementById('progressPillar');
+    const $back = document.getElementById('backBtn');
+    const $status = document.getElementById('navStatus');
+
+    let storageAvailable = true;
+    try { sessionStorage.setItem('__test', '1'); sessionStorage.removeItem('__test'); }
+    catch (e) { storageAvailable = false; }
+
+    function persist() {
+      if (!storageAvailable) return;
+      try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function render() {
+      const q = QUESTIONS[state.current];
+      const total = QUESTIONS.length;
+      const pct = Math.round(((state.current + 1) / total) * 100);
+      $fill.style.width = pct + '%';
+      $label.textContent = 'Question ' + (state.current + 1) + ' of ' + total;
+      $pillar.textContent = q.pillar;
+      $q.textContent = q.text;
+      $a.innerHTML = '';
+      ANSWERS.forEach(function (ans) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quiz-answer';
+        btn.setAttribute('role', 'radio');
+        btn.setAttribute('aria-checked', state.answers[q.id] === ans.value ? 'true' : 'false');
+        btn.textContent = ans.label;
+        if (state.answers[q.id] === ans.value) btn.classList.add('is-selected');
+        btn.addEventListener('click', function () { select(ans.value); });
+        $a.appendChild(btn);
+      });
+      $back.disabled = state.current === 0;
+      if (state.answers[q.id]) {
+        $status.textContent = state.current + 1 < total ? 'Loading next' : 'Calculating results';
+      } else {
+        $status.textContent = 'Select to answer';
+      }
+    }
+
+    function select(value) {
+      const q = QUESTIONS[state.current];
+      state.answers[q.id] = value;
+      persist();
+      render();
+      const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 180 : 650;
+      setTimeout(function () {
+        if (state.current + 1 < QUESTIONS.length) {
+          state.current += 1;
+          persist();
+          render();
+        } else {
+          const payload = JSON.stringify(state.answers);
+          if (storageAvailable) {
+            try { sessionStorage.setItem('ffb-quiz-v3c-final', payload); } catch (e) {}
+          }
+          const hash = encodeURIComponent(btoa(payload));
+          window.location.href = 'results.html#a=' + hash;
+        }
+      }, delay);
+    }
+
+    $back.addEventListener('click', function () {
+      if (state.current > 0) { state.current -= 1; persist(); render(); }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      const n = parseInt(e.key, 10);
+      if (n >= 1 && n <= 5) { select(n); e.preventDefault(); return; }
+      if (e.key === 'ArrowLeft' && !$back.disabled) { $back.click(); e.preventDefault(); }
+    });
+
+    render();
+  </script>
+</body>
+</html>
