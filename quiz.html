@@ -8,6 +8,9 @@
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#f6f4f1" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/purepurposekh/tracy-harris-brand-kit@main/styles/fonts.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/purepurposekh/tracy-harris-brand-kit@main/styles/tokens.css" />
   <link rel="stylesheet" href="styles.css" />
@@ -23,6 +26,14 @@
       <a href="mailto:hello@tracyharris.co" style="color:#6e8e77;">hello@tracyharris.co</a>
     </div>
   </noscript>
+
+  <header class="topbar">
+    <a href="index.html" class="topbar__brand" aria-label="Tracy Harris Co home">
+      <span class="topbar__dot" aria-hidden="true"></span>
+      Tracy Harris Co
+    </a>
+    <span class="topbar__tag">A Quiet Reset</span>
+  </header>
 
   <div class="quiz-shell">
 
@@ -45,9 +56,9 @@
 
     <nav class="quiz-nav" aria-label="Quiz navigation">
       <button type="button" class="quiz-nav__back" id="backBtn" aria-label="Previous question" disabled>
-        &larr; Back
+        &larr;&nbsp;&nbsp;Back
       </button>
-      <span id="navStatus" style="font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--p-mute);">
+      <span id="navStatus" style="font-family:var(--f-sans); font-size:11px; font-weight:500; letter-spacing:.24em; text-transform:uppercase; color:var(--p-mute);">
         Select to answer
       </span>
     </nav>
@@ -70,7 +81,7 @@
       { id: 'lead_4',  pillar: 'Lead',       text: 'I have a documented onboarding process that new clients or members go through without my direct involvement.' },
       { id: 'fresh_f', pillar: 'F.R.E.S.H.', text: 'I exercise regularly from a place of self-care and energy, not guilt or punishment.' },
       { id: 'fresh_r', pillar: 'F.R.E.S.H.', text: 'I spend meaningful time with people who are aligned with where I am going, not just where I have been.' },
-      { id: 'fresh_e', pillar: 'F.R.E.S.H.', text: 'My workspace and daily environment feel intentional, energising, and aligned with the business I am building.' },
+      { id: 'fresh_e', pillar: 'F.R.E.S.H.', text: 'My energy and environment, physical, digital, and emotional, feel intentional and aligned with the business I am building.' },
       { id: 'fresh_s1',pillar: 'F.R.E.S.H.', text: 'I trust my gut and make decisions with clarity, rather than constantly second-guessing myself.' },
       { id: 'fresh_s2',pillar: 'F.R.E.S.H.', text: 'I prioritise my own self-care and personal development without feeling guilty about it.' },
       { id: 'fresh_h', pillar: 'F.R.E.S.H.', text: 'I feel energised by my work most days, rather than depleted or running on empty.' },

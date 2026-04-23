@@ -8,6 +8,9 @@
   <meta name="robots" content="noindex" />
   <meta name="theme-color" content="#f6f4f1" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/purepurposekh/tracy-harris-brand-kit@main/styles/fonts.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/purepurposekh/tracy-harris-brand-kit@main/styles/tokens.css" />
   <link rel="stylesheet" href="styles.css" />
@@ -15,6 +18,14 @@
   <style>input, button { font-size: 16px; }</style>
 </head>
 <body data-brand="ffb">
+
+  <header class="topbar">
+    <a href="index.html" class="topbar__brand" aria-label="Tracy Harris Co home">
+      <span class="topbar__dot" aria-hidden="true"></span>
+      Tracy Harris Co
+    </a>
+    <span class="topbar__tag">Your Focus Area</span>
+  </header>
 
   <div class="results-shell">
 
@@ -52,6 +63,7 @@
 
     <section class="capture" aria-labelledby="capture-title">
       <div class="capture__inner">
+        <p class="capture__eyebrow">One last thing</p>
         <h2 id="capture-title" class="capture__title">Get the full <em>focus plan</em> in your inbox.</h2>
         <p class="capture__sub">
           I'll send a deeper breakdown of your focus area, plus a few emails about how I help women build thriving, Freedom Filled&reg; businesses. Unsubscribe any time.
@@ -60,7 +72,7 @@
           <label class="sr-only" for="email">Email address</label>
           <input type="email" name="email" id="email" class="capture__input"
             placeholder="your@email.com" autocomplete="email" required />
-          <button type="submit" class="capture__submit">Send &rarr;</button>
+          <button type="submit" class="capture__submit">Send it over</button>
         </form>
         <p class="capture__note">By signing up you agree to receive emails from Tracy Harris Co.</p>
       </div>
@@ -68,10 +80,17 @@
 
   </div>
 
+  <footer class="footer">
+    <p>&copy; 2026 Tracy Harris Co. &middot; <em>Freedom Filled&reg;</em> is a registered trademark.</p>
+  </footer>
+
   <script>
+    // Pillar dot colours. These are the four QUIZ pillars, not the FRESH pillars,
+    // so they use the brand neutral palette (aztek / sage). Copper and warm
+    // accents are reserved for FRESH-branded surfaces only.
     const PILLARS = [
       {
-        id: 'Build', name: 'Build', prefix: 'build_', color: '#ca6b4d',
+        id: 'Build', name: 'Build', prefix: 'build_', color: '#1e3735',
         focusDesc: 'Your offer foundation is where to focus first. Get clear on who you serve, what you solve, and how you talk about it, and every other pillar gets easier.',
         wins: [
           'Write your offer in one sentence. "I help [person] go from [before] to [after] through [method]." Say it out loud. Refine until it feels obvious.',
@@ -80,7 +99,7 @@
         ]
       },
       {
-        id: 'Sell', name: 'Sell', prefix: 'sell_', color: '#ddab7d',
+        id: 'Sell', name: 'Sell', prefix: 'sell_', color: '#243531',
         focusDesc: 'Selling is the gap between starting and thriving. Not pushier, not louder, just more consistent. This is where you build the muscle.',
         wins: [
           'Map your one reliable lead source. Name it. If you cannot name it, that is the first move. Pick one channel and commit for 90 days.',
@@ -89,7 +108,7 @@
         ]
       },
       {
-        id: 'Lead', name: 'Lead', prefix: 'lead_', color: '#6e8e77',
+        id: 'Lead', name: 'Lead', prefix: 'lead_', color: '#788E75',
         focusDesc: 'You have built and you are selling, but every decision still runs through you. Leading is the pillar that makes your business scalable and you sustainable.',
         wins: [
           'Document one workflow this week. Pick the thing you do most often and write the SOP as you do it. Next week, hand it off.',
@@ -98,7 +117,7 @@
         ]
       },
       {
-        id: 'F.R.E.S.H.', name: 'F.R.E.S.H.', prefix: 'fresh_', color: '#cc9989',
+        id: 'F.R.E.S.H.', name: 'F.R.E.S.H.', prefix: 'fresh_', color: '#6e8e77',
         focusDesc: 'The business is there to serve the life, not the other way around. When F.R.E.S.H. slips, the business does too. This is the foundation that holds everything.',
         wins: [
           'Block one non-negotiable hour this week for something that is yours alone. Not work, not family, just you. Defend it.',
@@ -202,7 +221,7 @@
       }
       // STUB: POST to AC endpoint here. For now, confirmation state only.
       const form = e.currentTarget;
-      form.innerHTML = '<p style="font-family:var(--f-serif-display);font-style:italic;color:var(--p-sage);font-size:17px;margin:0;padding:14px;">On the way. Check your inbox in the next few minutes.</p>';
+      form.innerHTML = '<p style="font-family:var(--f-serif-italic);font-style:italic;color:var(--p-sage);font-size:18px;margin:0;padding:14px;line-height:1.5;">On the way. Check your inbox in the next few minutes.</p>';
     });
 
     render();
