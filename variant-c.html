@@ -297,12 +297,15 @@
       color: var(--p-aztek);
       box-shadow: 0 10px 24px -16px rgba(30, 55, 53, 0.28);
     }
-    /* Position each node around the ring via translate offsets */
-    .diagram__node--f { transform: translate(-50%, -50%) translate(0,  -46%); }
-    .diagram__node--r { transform: translate(-50%, -50%) translate(44%, -14%); }
-    .diagram__node--e { transform: translate(-50%, -50%) translate(28%,  40%); }
-    .diagram__node--s { transform: translate(-50%, -50%) translate(-28%, 40%); }
-    .diagram__node--h { transform: translate(-50%, -50%) translate(-44%,-14%); }
+    /* Position each node around the ring. Ring is inset 10% so its radius = 40%
+       of the parent box. Place nodes ON the ring at 5 evenly-spaced angles
+       (starting at -90deg, 72deg apart). We position via top/left of the
+       parent, then shift the node by its own size. */
+    .diagram__node--f { top: 10%; left: 50%; transform: translate(-50%, -50%); }
+    .diagram__node--r { top: 32.25%; left: 88%; transform: translate(-50%, -50%); }
+    .diagram__node--e { top: 76.5%; left: 73.5%; transform: translate(-50%, -50%); }
+    .diagram__node--s { top: 76.5%; left: 26.5%; transform: translate(-50%, -50%); }
+    .diagram__node--h { top: 32.25%; left: 12%; transform: translate(-50%, -50%); }
 
     /* Colour the node borders via FRESH semantic tokens, scoped */
     [data-brand="fresh"] .diagram__node--f { border-color: var(--pillar-fitness); color: var(--pillar-fitness); }
@@ -555,12 +558,7 @@
       .dark-panel__script { font-size: 44px; }
       .dark-panel__title { font-size: 24px; }
       .framework__title { font-size: 54px; }
-      /* Drop diagram nodes slightly on narrow screens so they don't overlap the core */
-      .diagram__node--f { transform: translate(-50%, -50%) translate(0,  -48%); }
-      .diagram__node--r { transform: translate(-50%, -50%) translate(46%, -15%); }
-      .diagram__node--e { transform: translate(-50%, -50%) translate(30%, 42%); }
-      .diagram__node--s { transform: translate(-50%, -50%) translate(-30%,42%); }
-      .diagram__node--h { transform: translate(-50%, -50%) translate(-46%,-15%); }
+      /* Mobile node size already shrinks; ring positions stay the same */
     }
   </style>
 </head>
