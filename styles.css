@@ -126,7 +126,7 @@ body {
 }
 .hero__portrait figcaption {
   font-family: var(--f-script);
-  font-size: 28px;
+  font-size: 32px;
   color: var(--p-sage);
   line-height: 1;
 }
@@ -757,7 +757,7 @@ body {
   .hero__headline { font-size: 36px; }
   .hero__sub { font-size: 16px; }
   .hero__portrait img { width: 96px; height: 96px; }
-  .hero__portrait figcaption { font-size: 24px; }
+  .hero__portrait figcaption { font-size: 28px; }
   .btn { padding: 18px 32px; font-size: 13px; }
   .pillars { padding: 48px 0 96px; }
   .pillars__sub { margin-bottom: 56px; }
