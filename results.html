@@ -74,6 +74,7 @@
             placeholder="your@email.com" autocomplete="email" required />
           <button type="submit" class="capture__submit">Send it over</button>
         </form>
+        <p class="capture__note" id="captureError" hidden style="color:#a05a3f;">Hmm, that didn't go through. Give it another try in a moment.</p>
         <p class="capture__note">By signing up you agree to receive emails from Tracy Harris Co.</p>
       </div>
     </section>
@@ -211,7 +212,13 @@
       window.__ffbFocus = focus;
     }
 
-    // Email capture stub. Wire to ActiveCampaign later.
+    // Email capture. Posts to the site's ActiveCampaign capture endpoint,
+    // which upserts the contact and tags them per source. The second call
+    // adds a focus-area tag (ffb-quiz-v3c-focus-build/sell/lead/fresh) so
+    // follow-up emails can segment; it's fire-and-forget because the lead
+    // is already captured by the first call.
+    const CAPTURE_URL = 'https://website-cd-experiment-v3.tracy-harris-co.pages.dev/api/subscribe';
+
     document.getElementById('captureForm').addEventListener('submit', function (e) {
       e.preventDefault();
       const email = document.getElementById('email').value.trim();
@@ -219,9 +226,40 @@
         document.getElementById('email').focus();
         return;
       }
-      // STUB: POST to AC endpoint here. For now, confirmation state only.
+
       const form = e.currentTarget;
-      form.innerHTML = '<p style="font-family:var(--f-serif-italic);font-style:italic;color:var(--p-sage);font-size:18px;margin:0;padding:14px;line-height:1.5;">On the way. Check your inbox in the next few minutes.</p>';
+      const button = form.querySelector('.capture__submit');
+      const errorEl = document.getElementById('captureError');
+      button.disabled = true;
+      button.textContent = 'Sending...';
+      if (errorEl) errorEl.hidden = true;
+
+      function capture(source) {
+        return fetch(CAPTURE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email, source: source })
+        });
+      }
+
+      capture('ffb-quiz-v3c')
+        .then(function (res) {
+          if (!res.ok) throw new Error('capture failed: ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          if (!data.ok) throw new Error('capture rejected');
+          const focus = window.__ffbFocus;
+          if (focus && focus.prefix) {
+            capture('ffb-quiz-v3c-focus-' + focus.prefix.replace(/_$/, '')).catch(function () {});
+          }
+          form.innerHTML = '<p style="font-family:var(--f-serif-italic);font-style:italic;color:var(--p-sage);font-size:18px;margin:0;padding:14px;line-height:1.5;">On the way. Check your inbox in the next few minutes.</p>';
+        })
+        .catch(function () {
+          button.disabled = false;
+          button.textContent = 'Send it over';
+          if (errorEl) errorEl.hidden = false;
+        });
     });
 
     render();
